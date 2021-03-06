@@ -10,10 +10,10 @@ class HuffmanCode:
 			else:
 				freq[char] = 1
 
-		freq = sorted(freq.items(), key=lambda item: item[1])
+		freq = sorted(freq.items(), key=lambda item: item[1], reverse=True)
 		return freq
 
-	def generate_node_tree(freq):
+	def generate_nodes(freq):
 		nodes = []
 		while len(freq) > 1:
 			letter1, freq1 = freq[-1]
@@ -22,4 +22,11 @@ class HuffmanCode:
 			node = Node(letter1,letter2)
 			nodes.append([node, freq1 + freq2])
 		return nodes
+
+	def generate_tree(self, node):
+		tree = {}
+		left,right = node.get_node()
+		tree.update(generate_tree(left))
+		tree.update(generate_tree(right))
+		return tree
 
