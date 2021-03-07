@@ -1,30 +1,49 @@
 import json
-import HuffmanCode
+import os
+import HuffmanCodeEncode
+import HuffmanCodeDecode
 
-with open("cfg/config.json", "r") as j:
+with open("../cfg/config.json", "r") as j:
 	config = json.load(j)
 
-input_file = open("cfg/"+config["input_text"],"r")
-input_string = ""
-for line in input_file:
-	input_string += line
 
-freq = HuffmanCode.calculate_freq(input_string)
-nodes = HuffmanCode.generate_nodes(freq)
-binary = HuffmanCode.generate_binary_tree(nodes[0][0])
-binary_string = HuffmanCode.convert_binary(binary, input_string)
+def menu():
+	while True:
+		print("---Text file to be compressed: \'"+config["input_text"]+"\'---\n")
+		print("1. Compressed File")
+		print("2. Decompress File")
+		print("0. Close")
+		user_input = int(input())
+		if user_input == 1:
+			HuffmanCodeCompress()
+			compare_sizes(config["input_text"])
+		elif user_input == 2:
+			HuffmanCodeDecompress()
+		elif user_input == 0:
+			exit()
+
+def HuffmanCodeCompress():
+
+	input_file = open("../files/"+config["input_text"],"r")
+	input_string = ""
+	for line in input_file:
+		input_string += line
+
+	freq = HuffmanCodeEncode.calculate_freq(input_string)
+	nodes = HuffmanCodeEncode.generate_nodes(freq)
+	binary_tree = HuffmanCodeEncode.generate_binary_tree(nodes[0][0])
+	binary = HuffmanCodeEncode.convert_binary(binary_tree, input_string)
+
+	with open("../files/"+config["input_text"].split('.')[0]+".bin","wb") as output_file:
+		output_file.write(binary)
 
 
-def _to_Bytes(data):
-	b = bytearray()
-	for i in range(0, len(data), 8):
-		b.append(int(data[i:i+8], 2))
-	return bytes(b)
+def compare_sizes(file):
+	o = os.path.getsize("../files/"+file)
+	c = os.path.getsize("../files/"+file.split('.')[0]+".bin")
 
-output_string = binary_string
-output_string = _to_Bytes(output_string)
+	print("\nOriginal file: {} bytes".format(o))
+	print("Compressed file: {} bytes".format(c))
+	print("Compressed file {}% of percent of Original\n".format(round((((c/o)*100)))))
 
-with open("cfg/"+config["compressed_text"],"wb") as output_file:
-	output_file.write(output_string)
-
-
+menu()

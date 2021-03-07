@@ -39,4 +39,10 @@ def convert_binary(binary, input_string):
 	output_string = ''
 	for char in input_string:
 		output_string += binary[char]
-	return output_string
+	
+	b = bytearray()
+	for i in range(0, len(output_string), 8):
+		b.append(int(output_string[i:i+8], 2))
+	b = bytes(b)
+
+	return b
