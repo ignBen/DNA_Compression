@@ -1,6 +1,7 @@
 from Node import *
 
 class HuffmanCode:
+
 	def calculate_freq(string):
 		freq = {}
 
@@ -14,19 +15,24 @@ class HuffmanCode:
 		return freq
 
 	def generate_nodes(freq):
-		nodes = []
-		while len(freq) > 1:
-			letter1, freq1 = freq[-1]
-			letter2, freq2 = freq[-2]
-			freq = freq[:-2]
-			node = Node(letter1,letter2)
+		nodes = freq
+		while len(nodes) > 1:
+			key1, freq1 = nodes[-1]
+			key2, freq2 = nodes[-2]
+			nodes = nodes[:-2]
+			node = Node(key1, key2)
 			nodes.append((node, freq1 + freq2))
+			
+			nodes = sorted(nodes, key=lambda item: item[1], reverse=True)
+		
 		return nodes
 
-	def generate_tree(self, node, binary=""):
+	def generate_tree(nodes):
 		tree = {}
-		left,right = node.get_nodes()
-		tree.update(generate_tree(left, binary + '0'))
-		tree.update(generate_tree(right, binary + '1'))
-		return tree
+		for node in nodes:
+			left,right = node[0].get_nodes()
+			if type(left) is not str and type(right) is not str:
+				tree.update((left, binary + '0'))
+				tree.update((right, binary + '1'))
+				print(tree)
 
