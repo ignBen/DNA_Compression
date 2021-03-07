@@ -14,13 +14,19 @@ def menu():
 		print("2. Decompress File")
 		print("0. Close")
 		user_input = int(input())
+
+
 		if user_input == 1:
-			HuffmanCodeCompress()
+			decode = HuffmanCodeCompress()
 			compare_sizes(config["input_text"])
+			HuffmanCodeDecompress(decode)
+
 		elif user_input == 2:
-			HuffmanCodeDecompress()
+			pass
+
 		elif user_input == 0:
 			exit()
+
 
 def HuffmanCodeCompress():
 
@@ -37,6 +43,11 @@ def HuffmanCodeCompress():
 	with open("../files/"+config["input_text"].split('.')[0]+".bin","wb") as output_file:
 		output_file.write(binary)
 
+	return binary_tree
+
+def HuffmanCodeDecompress(decode):
+	with open("../files/"+config["input_text"].split('.')[0]+".bin","rb") as compressed_file:
+		result = HuffmanCodeDecode.decode(compressed_file, decode)
 
 def compare_sizes(file):
 	o = os.path.getsize("../files/"+file)
