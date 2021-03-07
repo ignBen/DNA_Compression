@@ -20,13 +20,13 @@ class HuffmanCode:
 			letter2, freq2 = freq[-2]
 			freq = freq[:-2]
 			node = Node(letter1,letter2)
-			nodes.append([node, freq1 + freq2])
+			nodes.append((node, freq1 + freq2))
 		return nodes
 
-	def generate_tree(self, node):
+	def generate_tree(self, node, binary=""):
 		tree = {}
-		left,right = node.get_node()
-		tree.update(generate_tree(left))
-		tree.update(generate_tree(right))
+		left,right = node.get_nodes()
+		tree.update(generate_tree(left, binary + '0'))
+		tree.update(generate_tree(right, binary + '1'))
 		return tree
 

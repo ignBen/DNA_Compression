@@ -4,5 +4,5 @@ class Node(object):
 		self.left = left
 		self.right = right
 
-	def get_node(self):
+	def get_nodes(self):
 		return self.left,self.right

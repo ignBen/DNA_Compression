@@ -12,5 +12,4 @@ for line in input_file:
 freq = HuffmanCode.calculate_freq(input_string)
 nodes = HuffmanCode.generate_nodes(freq)
 tree = HuffmanCode.generate_tree(nodes[0][0])
-print(tree)
 
