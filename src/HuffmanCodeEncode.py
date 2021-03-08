@@ -56,6 +56,18 @@ def convert_binary_data(tree, input_string):
 	return binary_string
 
 def convert_binary_tree(tree):
-	print(tree)
+	pass
+	# table = {}
+	# for item in tree:
+	# 	item = str(len(tree[item]))
+	# 	table.update({item: 0})
+
+	# for item in tree:
+	# 	item = str(len(tree[item]))
+	# 	table[item] += 1
+
+	# table = sorted(table.items(), key=lambda item: item[0])
+	# print(table)
+
 	
 	

@@ -16,7 +16,8 @@ def menu():
 
 	if file1.split('.')[1] == 'txt' and file2.split('.')[1] == 'bin':
 		tree = HuffmanCodeCompress(file1, file2)
-		HuffmanCodeDecompress(file2, file1, tree)
+		compare_sizes(file1,file2)
+		# HuffmanCodeDecompress(file2, file1, tree)
 	elif file1.split('.')[1] == 'bin' and file2.split('.')[1] == 'txt':
 		# HuffmanCodeDecompress(file1, file2)
 		pass
@@ -52,9 +53,9 @@ def HuffmanCodeDecompress(file_bin, file_text, tree):
 
 	print(result)
 
-def compare_sizes(file):
-	o = os.path.getsize("../files/"+file)
-	c = os.path.getsize("../files/"+file.split('.')[0]+".bin")
+def compare_sizes(file1,file2):
+	o = os.path.getsize("../files/"+file1)
+	c = os.path.getsize("../files/"+file2)
 
 	print("\nOriginal file: {} bytes".format(o))
 	print("Compressed file: {} bytes".format(c))
