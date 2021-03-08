@@ -2,7 +2,10 @@ from bitstring import BitArray
 import struct
 
 def decode(file, dic):
-	binary = str(BitArray(file.read()).bin)
+	file = file.read()
+
+	binary = BitArray(file).bin
+	print(binary)
 
 	text = ""
 	while binary:
@@ -10,6 +13,6 @@ def decode(file, dic):
 			if binary.startswith(dic[item]):
 				text += item
 				binary = binary[len(dic[item]):]
-				print(len(binary))
+
 
 	return text
