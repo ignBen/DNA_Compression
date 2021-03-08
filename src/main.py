@@ -19,7 +19,7 @@ def menu():
 		if user_input == 1:
 			decode = HuffmanCodeCompress()
 			compare_sizes(config["input_text"])
-			HuffmanCodeDecompress(decode)
+			# HuffmanCodeDecompress(decode)
 
 		elif user_input == 2:
 			pass
@@ -35,15 +35,18 @@ def HuffmanCodeCompress():
 	for line in input_file:
 		input_string += line
 
-	freq = HuffmanCodeEncode.calculate_freq(input_string)
+
+	freq = HuffmanCodeEncode.generate_freq(input_string)
 	nodes = HuffmanCodeEncode.generate_nodes(freq)
-	binary_tree = HuffmanCodeEncode.generate_binary_tree(nodes[0][0])
-	binary = HuffmanCodeEncode.convert_binary(binary_tree, input_string)
+	tree = HuffmanCodeEncode.generate_binary_tree(node[0][0])
+	
+	binary_data = HuffmanCodeEncode.convert_binary_data(tree, input_string)
+	binary_tree = HuffmanCodeEncode.convert_binary_tree(tree)
 
 	with open("../files/"+config["input_text"].split('.')[0]+".bin","wb") as output_file:
 		binary.tofile(output_file)
 
-	return binary_tree
+	return tree
 
 def HuffmanCodeDecompress(decode):
 	with open("../files/"+config["input_text"].split('.')[0]+".bin","rb") as compressed_file:

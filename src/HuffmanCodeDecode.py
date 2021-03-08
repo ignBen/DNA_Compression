@@ -5,7 +5,6 @@ def decode(file, dic):
 	file = file.read()
 
 	binary = BitArray(file).bin
-	print(binary)
 
 	text = ""
 	while binary:

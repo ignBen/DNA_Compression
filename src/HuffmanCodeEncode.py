@@ -1,7 +1,7 @@
 from bitstring import BitArray
 from Node import *
 
-def calculate_freq(string):
+def generate_freq(string):
 	freq = {}
 
 	for char in string:
@@ -11,10 +11,13 @@ def calculate_freq(string):
 			freq[char] = 1
 
 	freq = sorted(freq.items(), key=lambda item: item[1], reverse=True)
+	
 	return freq
 
 def generate_nodes(freq):
+	
 	nodes = freq
+
 	while len(nodes) > 1:
 		key1, freq1 = nodes[-1]
 		key2, freq2 = nodes[-2]
@@ -27,6 +30,7 @@ def generate_nodes(freq):
 	return nodes
 
 def generate_binary_tree(node, binary=''):
+	
 	if type(node) is str:
 		return {node: binary}
 
@@ -34,13 +38,17 @@ def generate_binary_tree(node, binary=''):
 	left,right = node.get_nodes()
 	tree.update(generate_binary_tree(left, binary + '0'))
 	tree.update(generate_binary_tree(right, binary + '1'))
+	
 	return tree
 
-def convert_binary(binary, input_string):
-	output_string = ''
+def convert_binary_data(tree, input_string):
+	binary_string = ''
 	for char in input_string:
-		output_string += binary[char]
+		binary_string += tree[char]
 
-	output_string = BitArray(bin=output_string)
 
-	return output_string
+	binary_string = BitArray(bin=binary_string)
+
+	return binary_string
+
+def convert_binary_tree(tree):
