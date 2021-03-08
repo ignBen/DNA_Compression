@@ -55,5 +55,7 @@ def convert_binary_data(tree, input_string):
 
 	return binary_string
 
-def convert_binary_tree(tree, freq):
-	pass
+def convert_binary_tree(tree):
+	print(tree)
+	
+	

@@ -6,9 +6,8 @@ def decode(file, dic):
 
 	binary = BitArray(file).bin
 	padding_bits = (int(str(binary[:3]),2))
-	
-	binary = binary[3:]
-	binary = binary[:-padding_bits]
+
+	binary = binary[3:-padding_bits]
 
 	text = ""
 	while binary:

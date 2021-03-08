@@ -38,7 +38,8 @@ def HuffmanCodeCompress(file_text, file_bin):
 	tree = HuffmanCodeEncode.generate_binary_tree(nodes[0][0])
 
 	binary_data = HuffmanCodeEncode.convert_binary_data(tree, input_string)
-	binary_tree = HuffmanCodeEncode.convert_binary_tree(tree, freq)
+	binary_tree = HuffmanCodeEncode.convert_binary_tree(tree)
+	print(binary_tree)
 
 	with open("../files/"+file_bin,"wb") as output_file:
 		binary_data.tofile(output_file)
