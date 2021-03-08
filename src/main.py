@@ -49,6 +49,8 @@ def HuffmanCodeDecompress(decode):
 	with open("../files/"+config["input_text"].split('.')[0]+".bin","rb") as compressed_file:
 		result = HuffmanCodeDecode.decode(compressed_file, decode)
 
+	print(result)
+
 def compare_sizes(file):
 	o = os.path.getsize("../files/"+file)
 	c = os.path.getsize("../files/"+file.split('.')[0]+".bin")

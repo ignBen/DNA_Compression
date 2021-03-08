@@ -41,8 +41,6 @@ def convert_binary(binary, input_string):
 	for char in input_string:
 		output_string += binary[char]
 
-	print(output_string)
-	
 	output_string = BitArray(bin=output_string)
 
 	return output_string
