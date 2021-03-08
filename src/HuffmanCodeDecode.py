@@ -6,8 +6,6 @@ def decode(file, dic):
 
 	binary = BitArray(file).bin
 	padding_bits = (int(str(binary[:3]),2))
-
-	print(binary)
 	
 	binary = binary[3:]
 	binary = binary[:-padding_bits]
@@ -18,6 +16,4 @@ def decode(file, dic):
 			if binary.startswith(dic[item]):
 				text += item
 				binary = binary[len(dic[item]):]
-				print(binary)
-
 	return text
