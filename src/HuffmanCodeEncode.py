@@ -56,7 +56,7 @@ def convert_binary_data(tree, input_string):
 	return binary_string
 
 def convert_binary_tree(tree):
-	pass
+	print(tree)
 	# table = {}
 	# for item in tree:
 	# 	item = str(len(tree[item]))
