@@ -1,10 +1,8 @@
+from bitstring import BitArray
 import struct
 
 def decode(file, dic):
-	binary = ""
-	for byte in file.read():
-		binary += (bin(byte)[2:])
-
+	binary = BitArray(file.read()).bin
 	print(binary)
 
 	# text = ""

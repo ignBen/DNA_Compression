@@ -41,7 +41,7 @@ def HuffmanCodeCompress():
 	binary = HuffmanCodeEncode.convert_binary(binary_tree, input_string)
 
 	with open("../files/"+config["input_text"].split('.')[0]+".bin","wb") as output_file:
-		output_file.write(binary)
+		binary.tofile(output_file)
 
 	return binary_tree
 

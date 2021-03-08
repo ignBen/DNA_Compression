@@ -1,3 +1,4 @@
+from bitstring import BitArray
 from Node import *
 
 def calculate_freq(string):
@@ -41,5 +42,7 @@ def convert_binary(binary, input_string):
 		output_string += binary[char]
 
 	print(output_string)
+	
+	output_string = BitArray(bin=output_string)
 
-	return int(output_string, 2).to_bytes((len(output_string) + 7) // 8, byteorder='big')
+	return output_string
