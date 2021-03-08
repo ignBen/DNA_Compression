@@ -42,9 +42,4 @@ def convert_binary(binary, input_string):
 
 	print(output_string)
 
-	b = bytearray()
-	for i in range(0, len(output_string), 8):
-		b.append(int(output_string[i:i+8], 2))
-	b = bytes(b)
-
-	return b
+	return int(output_string, 2).to_bytes((len(output_string) + 7) // 8, byteorder='big')

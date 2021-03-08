@@ -1,11 +1,11 @@
 import struct
 
 def decode(file, dic):
-	binary = ''
+	binary = ""
 	for byte in file.read():
 		binary += (bin(byte)[2:])
 
-	# print(binary)
+	print(binary)
 
 	# text = ""
 	# for item in dic:
