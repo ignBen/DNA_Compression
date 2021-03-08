@@ -46,9 +46,14 @@ def convert_binary_data(tree, input_string):
 	for char in input_string:
 		binary_string += tree[char]
 
+	no_padding_bits_dec = (5-len(binary_string)%8)
+	no_padding_bits_bin = "{:03b}".format(no_padding_bits_dec)
+
+	binary_string = no_padding_bits_bin + binary_string + (no_padding_bits_dec*'0')
 
 	binary_string = BitArray(bin=binary_string)
 
 	return binary_string
 
-def convert_binary_tree(tree):
+def convert_binary_tree(tree, freq):
+	pass

@@ -1,36 +1,33 @@
 import json
+import sys
 import os
 import HuffmanCodeEncode
 import HuffmanCodeDecode
 
-with open("../cfg/config.json", "r") as j:
-	config = json.load(j)
-
 
 def menu():
-	while True:
-		print("---Text file to be compressed: \'"+config["input_text"]+"\'---\n")
-		print("1. Compressed File")
-		print("2. Decompress File")
-		print("0. Close")
-		user_input = int(input())
+
+	try:
+		file1 = sys.argv[1]
+		file2 = sys.argv[2]
+	except:
+		print('Invalid Files')
+		exit()
+
+	if file1.split('.')[1] == 'txt' and file2.split('.')[1] == 'bin':
+		tree = HuffmanCodeCompress(file1, file2)
+		HuffmanCodeDecompress(file2, file1, tree)
+	elif file1.split('.')[1] == 'bin' and file2.split('.')[1] == 'txt':
+		# HuffmanCodeDecompress(file1, file2)
+		pass
+	else:
+		print('Invalid Files')
+		exit()
 
 
-		if user_input == 1:
-			decode = HuffmanCodeCompress()
-			compare_sizes(config["input_text"])
-			# HuffmanCodeDecompress(decode)
+def HuffmanCodeCompress(file_text, file_bin):
 
-		elif user_input == 2:
-			pass
-
-		elif user_input == 0:
-			exit()
-
-
-def HuffmanCodeCompress():
-
-	input_file = open("../files/"+config["input_text"],"r")
+	input_file = open("../files/"+file_text,"r")
 	input_string = ""
 	for line in input_file:
 		input_string += line
@@ -38,19 +35,19 @@ def HuffmanCodeCompress():
 
 	freq = HuffmanCodeEncode.generate_freq(input_string)
 	nodes = HuffmanCodeEncode.generate_nodes(freq)
-	tree = HuffmanCodeEncode.generate_binary_tree(node[0][0])
-	
-	binary_data = HuffmanCodeEncode.convert_binary_data(tree, input_string)
-	binary_tree = HuffmanCodeEncode.convert_binary_tree(tree)
+	tree = HuffmanCodeEncode.generate_binary_tree(nodes[0][0])
 
-	with open("../files/"+config["input_text"].split('.')[0]+".bin","wb") as output_file:
-		binary.tofile(output_file)
+	binary_data = HuffmanCodeEncode.convert_binary_data(tree, input_string)
+	binary_tree = HuffmanCodeEncode.convert_binary_tree(tree, freq)
+
+	with open("../files/"+file_bin,"wb") as output_file:
+		binary_data.tofile(output_file)
 
 	return tree
 
-def HuffmanCodeDecompress(decode):
-	with open("../files/"+config["input_text"].split('.')[0]+".bin","rb") as compressed_file:
-		result = HuffmanCodeDecode.decode(compressed_file, decode)
+def HuffmanCodeDecompress(file_bin, file_text, tree):
+	with open("../files/"+file_bin,"rb") as compressed_file:
+		result = HuffmanCodeDecode.decode(compressed_file, tree)
 
 	print(result)
 
