@@ -46,8 +46,10 @@ def convert_binary_data(tree, input_string):
 	for char in input_string:
 		binary_string += tree[char]
 
-	no_padding_bits_dec = (5-len(binary_string)%8)
+	no_padding_bits_dec = 8-((len(binary_string)+3)%8)
 	no_padding_bits_bin = "{:03b}".format(no_padding_bits_dec)
+
+	binary_tree = encoded_huffman_tree(tree)
 
 	binary_string = no_padding_bits_bin + binary_string + (no_padding_bits_dec*'0')
 
@@ -55,19 +57,35 @@ def convert_binary_data(tree, input_string):
 
 	return binary_string
 
-def convert_binary_tree(tree):
+def inc_binary(x):
+	if len(x) == 0:
+		return x
+
+	if x[-1] == '0':
+		x = x[:-1] + '1'
+	else:
+		x = inc_binary(x[:-1]) + '0'
+
+	return x
+
+	
+def encoded_huffman_tree(tree):
+	tree = dict(sorted(tree.items(), key=lambda item: item[0])) #Sort alphabetically
+	tree = sorted(tree.items(), key=lambda item: len(item[1])) #Sort by length of code
+
+	tree[0] = [tree[0][0],len(tree[0][1])*'0']
+
+	count = 1
+	while count < len(tree):
+		new = [tree[count][0],inc_binary(tree[count-1][1])]
+		if len(tree[count-1][1]) < len(tree[count][1]):
+			new[1] += (len(tree[count][1]) - len(tree[count-1][1]))*'0'
+		tree[count] = new
+		count += 1
+	
 	print(tree)
-	# table = {}
-	# for item in tree:
-	# 	item = str(len(tree[item]))
-	# 	table.update({item: 0})
 
-	# for item in tree:
-	# 	item = str(len(tree[item]))
-	# 	table[item] += 1
 
-	# table = sorted(table.items(), key=lambda item: item[0])
-	# print(table)
 
 	
 	
