@@ -1,10 +1,16 @@
 from bitstring import BitArray
-import struct
+
+def progress_bar(binary_start_len, binary_len):
+	print("\n"*100)
+	percent = round((binary_len/binary_start_len) * 100)
+	print("[%s]" % ("="*round(10-(percent/10))))
+
 
 def decode(file):
 	file = file.read()
 
 	binary = BitArray(file).bin
+	binary_start_len = len(binary)
 
 	#drop padding bits
 	padding_bits = (int(str(binary[:3]),2))
@@ -27,10 +33,15 @@ def decode(file):
 
 		dic.update({key: code})
 
+	# progress_bar(binary_start_len,len(binary))
+
+	print(dic)
+
 	text = ""
 	while binary:
 		for item in dic:
 			if binary.startswith(dic[item]):
 				text += item
 				binary = binary[len(dic[item]):]
+				# progress_bar(binary_start_len,len(binary))
 	return text
