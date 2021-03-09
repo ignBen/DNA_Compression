@@ -75,6 +75,6 @@ def compare_sizes(file1,file2):
 
 	print("\nOriginal file: {} bytes".format(o))
 	print("Compressed file: {} bytes".format(c))
-	print("Compressed file {}% of percent of Original\n".format(round((((c/o)*100)))))
+	print("Compressed file {}% of percent of original\n".format(round((((c/o)*100)))))
 
 menu()

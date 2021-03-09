@@ -43,4 +43,5 @@ def decode(file):
 			if binary.startswith(dic[item]): # if starts with huffman code add this to decoded text
 				text += item
 				binary = binary[len(dic[item]):] # remove these deocded bits from start of binary string 
+			print(len(binary))
 	return text
