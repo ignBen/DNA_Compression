@@ -15,11 +15,10 @@ def menu():
 		exit()
 
 	if file1.split('.')[1] == 'txt' and file2.split('.')[1] == 'bin':
-		tree = HuffmanCodeCompress(file1, file2)
+		HuffmanCodeCompress(file1, file2)
 		compare_sizes(file1,file2)
-		# HuffmanCodeDecompress(file2, file1, tree)
 	elif file1.split('.')[1] == 'bin' and file2.split('.')[1] == 'txt':
-		# HuffmanCodeDecompress(file1, file2)
+		HuffmanCodeDecompress(file1, file2)
 		pass
 	else:
 		print('Invalid Files')
@@ -45,11 +44,12 @@ def HuffmanCodeCompress(file_text, file_bin):
 
 	return tree
 
-def HuffmanCodeDecompress(file_bin, file_text, tree):
+def HuffmanCodeDecompress(file_bin, file_text):
 	with open("../files/"+file_bin,"rb") as compressed_file:
-		result = HuffmanCodeDecode.decode(compressed_file, tree)
+		result = HuffmanCodeDecode.decode(compressed_file)
 
-	print(result)
+	with open("../files/"+file_text,'w') as new_file:
+		new_file.write(result)
 
 def compare_sizes(file1,file2):
 	o = os.path.getsize("../files/"+file1)
