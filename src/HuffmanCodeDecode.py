@@ -4,11 +4,12 @@ def decode(file):
 	file = file.read()
 
 	binary = BitArray(file).bin
-	binary_start_len = len(binary)
 
 	#drop padding bits
 	padding_bits = (int(str(binary[:3]),2))
-	binary = binary[3:-padding_bits]
+	if padding_bits > 0:
+		binary = binary[:-padding_bits]
+	binary = binary[3:]
 
 	#regerate tree
 	dic = {}
@@ -28,10 +29,12 @@ def decode(file):
 		dic.update({key: code})
 
 
+
 	text = ""
 	while binary:
 		for item in dic:
 			if binary.startswith(dic[item]):
 				text += item
 				binary = binary[len(dic[item]):]
+		print(len(binary))
 	return text

@@ -49,7 +49,7 @@ def convert_binary_data(tree, input_string):
 	binary_tree = encoded_huffman_tree(tree)
 	binary_string = binary_tree	+ binary_string
 
-	no_padding_bits_dec = 8-((len(binary_string)+3)%8)
+	no_padding_bits_dec = (8-((len(binary_string)+3)%8))%8
 	no_padding_bits_bin = "{:03b}".format(no_padding_bits_dec)
 
 	binary_string = no_padding_bits_bin + binary_string + (no_padding_bits_dec*'0')
@@ -81,6 +81,7 @@ def encoded_huffman_tree(tree):
 		binary_string += key+no_bits+code
 
 	no_keys = "{:08b}".format(no_keys)
+
 
 	binary_string = no_keys+binary_string
 
