@@ -3,7 +3,7 @@ from bitstring import BitArray
 def progress_bar(binary_start_len, binary_len):
 	print("\n"*100)
 	percent = round((binary_len/binary_start_len) * 100)
-	print("[%s]" % ("="*round(10-(percent/10))))
+	print("[%s] | %d%%" % ("="*round(10-(percent/10)), percent))
 
 
 def decode(file):
@@ -22,8 +22,8 @@ def decode(file):
 	binary = binary[8:]
 
 	for i in range(0,no_keys):
-		key = chr(int(str(binary[:8]),2))
-		binary = binary[8:]
+		key = chr(int(str(binary[:16]),2))
+		binary = binary[16:]
 
 		no_bits = int(str(binary[:8]),2)
 		binary = binary[8:]
@@ -32,10 +32,10 @@ def decode(file):
 		binary = binary[no_bits:]
 
 		dic.update({key: code})
-
-	# progress_bar(binary_start_len,len(binary))
-
 	print(dic)
+
+	progress_bar(binary_start_len,len(binary))
+
 
 	text = ""
 	while binary:
@@ -43,5 +43,5 @@ def decode(file):
 			if binary.startswith(dic[item]):
 				text += item
 				binary = binary[len(dic[item]):]
-				# progress_bar(binary_start_len,len(binary))
+				progress_bar(binary_start_len,len(binary))
 	return text

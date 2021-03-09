@@ -18,7 +18,6 @@ def menu():
 		compare_sizes(file1,file2)
 	elif file1.split('.')[1] == 'bin' and file2.split('.')[1] == 'txt':
 		HuffmanCodeDecompress(file1, file2)
-		pass
 	else:
 		print('Invalid Files')
 		exit()
