@@ -57,18 +57,6 @@ def convert_binary_data(tree, input_string):
 	binary_string = BitArray(bin=binary_string)
 
 	return binary_string
-
-def inc_binary(x):
-	if len(x) == 0:
-		return x
-
-	if x[-1] == '0':
-		x = x[:-1] + '1'
-	else:
-		x = inc_binary(x[:-1]) + '0'
-
-	return x
-
 	
 def encoded_huffman_tree(tree):
 	binary_string = ''
