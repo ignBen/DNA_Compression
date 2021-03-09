@@ -79,7 +79,6 @@ def encoded_huffman_tree(tree):
 		code = tree[item]
 		no_keys +=1
 		binary_string += key+no_bits+code
-		print(key)
 
 	no_keys = "{:08b}".format(no_keys)
 
