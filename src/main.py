@@ -1,3 +1,8 @@
+"""
+Main module for running Huffman Compression and Decompression
+Gives comparison infomration on compressed files upon successfull compression
+"""
+
 import sys
 import os
 import HuffmanCodeEncode
@@ -5,6 +10,7 @@ import HuffmanCodeDecode
 
 
 def menu():
+	"""Handler for diciding if request is compression or decompression"""
 
 	try:
 		file1 = sys.argv[1]
@@ -24,6 +30,13 @@ def menu():
 
 
 def HuffmanCodeCompress(file_text, file_bin):
+	"""Runs the HuffmanCode compression module in seperate parts.
+	This was done to help with debugging
+
+	Keyword arguments:
+	file_text -- input text file (required)
+	file_bin -- output binary file name (required)
+	"""
 
 	input_file = open("../files/"+file_text,"r")
 	input_string = ""
@@ -43,6 +56,13 @@ def HuffmanCodeCompress(file_text, file_bin):
 	return tree
 
 def HuffmanCodeDecompress(file_bin, file_text):
+	"""Runs decode on binary file compressed using this programs
+	implementation of HuffmanCoding
+
+	Keyword arguments:
+	file_bin -- input text file (required)
+	file_text -- output text file name (required)
+	"""
 	with open("../files/"+file_bin,"rb") as compressed_file:
 		result = HuffmanCodeDecode.decode(compressed_file)
 
