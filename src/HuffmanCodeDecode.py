@@ -50,16 +50,8 @@ def decode(file):
 				binary = binary[len(dic[item]):] # remove these deocded bits from start of binary string 
 		print(total_bits-(len(binary)),"/",total_bits,"bits decoded")
 
-	# text = ""
-	# while binary:
-	# 	for item in dic:
-	# 		if binary[:len(dic[item])] == dic[item]:
-	# 			text += item
-	# 			binary = binary[len(dic[item]):]
-	# 	print(total_bits-(len(binary)),"/",total_bits,"bits decoded")
-
 	time_end = time()
 	time_to_complete = time_end - time_start
-	print(time_to_complete, "Seconds to decompress")
+	print(round(time_to_complete, 4), "Seconds to decompress")
 
 	return text
