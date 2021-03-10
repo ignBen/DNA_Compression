@@ -11,11 +11,15 @@ def generate_freq(string):
 	"""
 	freq = {} #Frequency dictionary
 
+	# for char in string:
+	# 	if char in freq:
+	# 		freq[char] += 1 #increment character if already in tree
+	# 	else:
+	# 		freq[char] = 1 #add character if not already in tree
+
 	for char in string:
-		if char in freq:
-			freq[char] += 1 #increment character if already in tree
-		else:
-			freq[char] = 1 #add character if not already in tree
+		freq.update({char: 0})
+		freq[char] += 1
 
 	#Sort dictionary by freq
 	freq = sorted(freq.items(), key=lambda item: item[1], reverse=True)
