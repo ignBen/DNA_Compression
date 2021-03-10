@@ -1,5 +1,7 @@
 """Implementation of HuffmanCode decompression in python3"""
 
+from time import time
+
 from bitstring import BitArray
 
 def decode(file):
@@ -8,10 +10,12 @@ def decode(file):
 	Keyword arguments:
 	file --  compressed file (required)
 	"""
+	time_start = time()
 
 	file = file.read()
 
 	binary = BitArray(file).bin
+	total_bits = len(binary)
 
 	#drop padding bits
 	padding_bits = (int(str(binary[:3]),2)) #first 3 bits identify number of padding bits
@@ -37,11 +41,25 @@ def decode(file):
 		dic.update({key: code}) #add the decoded key and code to new huffman tree
 
 	#itterate through text to regenerate text from decoded huffman tree
+
 	text = ""
 	while binary:
 		for item in dic:
 			if binary.startswith(dic[item]): # if starts with huffman code add this to decoded text
 				text += item
 				binary = binary[len(dic[item]):] # remove these deocded bits from start of binary string 
-			print(len(binary))
+		print(total_bits-(len(binary)),"/",total_bits,"bits decoded")
+
+	# text = ""
+	# while binary:
+	# 	for item in dic:
+	# 		if binary[:len(dic[item])] == dic[item]:
+	# 			text += item
+	# 			binary = binary[len(dic[item]):]
+	# 	print(total_bits-(len(binary)),"/",total_bits,"bits decoded")
+
+	time_end = time()
+	time_to_complete = time_end - time_start
+	print(time_to_complete, "Seconds to decompress")
+
 	return text
