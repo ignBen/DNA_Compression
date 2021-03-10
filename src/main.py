@@ -7,6 +7,7 @@ import sys
 import os
 import HuffmanCodeEncode
 import HuffmanCodeDecode
+from time import time
 
 
 def menu():
@@ -20,10 +21,23 @@ def menu():
 		exit()
 
 	if file1.split('.')[-1] == 'txt' and file2.split('.')[-1] == 'bin':
+		time_start = time()
+
 		HuffmanCodeCompress(file1, file2)
 		compare_sizes(file1,file2)
+
+		time_end = time()
+		time_to_complete = time_end - time_start
+		print(round(time_to_complete, 4), "Seconds to compress\n") # output time in seconds for compression to complete
+
 	elif file1.split('.')[-1] == 'bin' and file2.split('.')[-1] == 'txt':
+		time_start = time()
+
 		HuffmanCodeDecompress(file1, file2)
+
+		time_end = time()
+		time_to_complete = time_end - time_start
+		print(round(time_to_complete, 4), "Seconds to decompress\n") # output time in seconds for decompression to complete
 	else:
 		print('Invalid Files')
 		exit()
@@ -43,7 +57,7 @@ def HuffmanCodeCompress(file_text, file_bin):
 	for line in input_file:
 		input_string += line
 
-
+	time_start = time()
 	freq = HuffmanCodeEncode.generate_freq(input_string)
 	nodes = HuffmanCodeEncode.generate_nodes(freq)
 	tree = HuffmanCodeEncode.generate_binary_tree(nodes[0][0])
@@ -53,7 +67,7 @@ def HuffmanCodeCompress(file_text, file_bin):
 	with open("../files/"+file_bin,"wb") as output_file:
 		binary_data.tofile(output_file)
 
-	return tree
+
 
 def HuffmanCodeDecompress(file_bin, file_text):
 	"""Runs decode on binary file compressed using this programs
@@ -75,6 +89,6 @@ def compare_sizes(file1,file2):
 
 	print("\nOriginal file: {} bytes".format(o))
 	print("Compressed file: {} bytes".format(c))
-	print("Compressed file {}% of percent of original\n".format(round((((c/o)*100)))))
+	print("Compressed file {}% of percent of original".format(round((((c/o)*100)))))
 
 menu()

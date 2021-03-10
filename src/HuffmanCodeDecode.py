@@ -1,7 +1,5 @@
 """Implementation of HuffmanCode decompression in python3"""
 
-from time import time
-
 from bitstring import BitArray
 
 def decode(file):
@@ -10,7 +8,6 @@ def decode(file):
 	Keyword arguments:
 	file --  compressed file (required)
 	"""
-	time_start = time()
 
 	file = file.read()
 
@@ -49,9 +46,5 @@ def decode(file):
 				text += item
 				binary = binary[len(dic[item]):] # remove these deocded bits from start of binary string 
 		print(total_bits-(len(binary)),"/",total_bits,"bits decoded") # output number of bits ramaining for decompression
-
-	time_end = time()
-	time_to_complete = time_end - time_start
-	print(round(time_to_complete, 4), "Seconds to decompress") # output time in seconds for decompression to complete
 
 	return text
