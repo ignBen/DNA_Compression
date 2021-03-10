@@ -48,10 +48,10 @@ def decode(file):
 			if binary.startswith(dic[item]): # if starts with huffman code add this to decoded text
 				text += item
 				binary = binary[len(dic[item]):] # remove these deocded bits from start of binary string 
-		print(total_bits-(len(binary)),"/",total_bits,"bits decoded")
+		print(total_bits-(len(binary)),"/",total_bits,"bits decoded") # output number of bits ramaining for decompression
 
 	time_end = time()
 	time_to_complete = time_end - time_start
-	print(round(time_to_complete, 4), "Seconds to decompress")
+	print(round(time_to_complete, 4), "Seconds to decompress") # output time in seconds for decompression to complete
 
 	return text
