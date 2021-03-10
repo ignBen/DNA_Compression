@@ -30,7 +30,7 @@ The same method follows for Run-Length encoding.
 ```
 ### Example Data
 For convenience a set of sample data has already been put in `DNA_Compression/files`
-Other larger data sets such as `fib41.txt` `dblp.xml.00001.txt` `world_leaders.txt` can be found at: `http://pizzachili.dcc.uchile.cl/repcorpus.html`, cannot be uploaded here as file limit for GitHub is 100Mb
+Other larger data sets such as `fib41.txt` `dblp.xml.00001.txt` `world_leaders.txt` can be found at: http://pizzachili.dcc.uchile.cl/repcorpus.html, cannot be uploaded here as file limit for GitHub is 100Mb
 | File name                 | Description                                                                           |
 |---------------------------|---------------------------------------------------------------------------------------|
 | oliver-twist-***.txt      | There are three versions of this file in different languages: English, French, German |
