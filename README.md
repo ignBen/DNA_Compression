@@ -37,4 +37,5 @@ For convenience a set of sample data has already been put in `DNA_Compression/fi
 | quick-brown-fox.txt       | 'The quick brown fox jumps over the lazy dog'                                         |
 | ascii.txt                 | A document containing all ascii characters plus some regular text                     |
 | image.txt                 | Used to demonstrate run-length encoding                                               |
+Other larger data sets such as `fib41.txt` `dblp.xml.00001.txt` `world_leaders.txt` can be found at: `http://pizzachili.dcc.uchile.cl/repcorpus.html`, cannot be uploaded here as file limit for GitHub is 100Mb
  
