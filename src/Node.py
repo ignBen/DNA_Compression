@@ -6,9 +6,3 @@ class Node(object):
 
 	def get_nodes(self):
 		return self.left,self.right
-
-	def get_right(self):
-		return self.right
-
-	def get_left(self):
-		return self.left

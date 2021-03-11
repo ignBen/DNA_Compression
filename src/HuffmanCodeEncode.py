@@ -11,15 +11,11 @@ def generate_freq(string):
 	"""
 	freq = {} #Frequency dictionary
 
-	# for char in string:
-	# 	if char in freq:
-	# 		freq[char] += 1 #increment character if already in tree
-	# 	else:
-	# 		freq[char] = 1 #add character if not already in tree
-
 	for char in string:
-		freq.update({char: 0})
-		freq[char] += 1
+		if char in freq:
+			freq[char] += 1 #increment character if already in tree
+		else:
+			freq[char] = 1 #add character if not already in tree
 
 	#Sort dictionary by freq
 	freq = sorted(freq.items(), key=lambda item: item[1], reverse=True)
@@ -49,7 +45,7 @@ def generate_nodes(freq):
 	
 	return nodes
 
-def generate_binary_tree(node, binary=''):
+def generate_huffman_table(node, binary=''):
 	"""Creates the huffman dictionary containg each key, with it corresponding
 	code. Traverses the tree and records wether a node is left or right (0 or 1)
 	once final node is hit, the {key: code} is returned
@@ -64,8 +60,8 @@ def generate_binary_tree(node, binary=''):
 
 	tree = {}
 	left,right = node.get_nodes() 
-	tree.update(generate_binary_tree(left, binary + '0')) #traverse the left hand side of the tree
-	tree.update(generate_binary_tree(right, binary + '1')) #traverse the right hand side of the tree 
+	tree.update(generate_huffman_table(left, binary + '0')) #traverse the left hand side of the tree
+	tree.update(generate_huffman_table(right, binary + '1')) #traverse the right hand side of the tree 
 	
 	return tree
 

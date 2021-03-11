@@ -59,7 +59,7 @@ def HuffmanCodeCompress(file_text, file_bin):
 
 	freq = HuffmanCodeEncode.generate_freq(input_string)
 	nodes = HuffmanCodeEncode.generate_nodes(freq)
-	tree = HuffmanCodeEncode.generate_binary_tree(nodes[0][0])
+	tree = HuffmanCodeEncode.generate_huffman_table(nodes[0][0])
 
 	binary_data = HuffmanCodeEncode.convert_binary_data(tree, input_string)
 
